@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form id='movies'>
+      <label for='title'>Enter Movie Title: </label>
+      <input id='title' type='text' name='title' minlength='2'>
+      <label for='rating'>Enter Movie Rating(1-10): </label>
+      <input id='rating' type='number' name='rating' min='0' max='10' step='1'>  
+      <input type='submit' id='submitForm'>
+    </form>
+<br />
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>    
+/*When the form is submitted, capture the values for each of the inputs 
+  and append them to the DOM along with a button to remove each title 
+  and rating from the DOM.
+  When the button to remove is clicked, remove each title
+   and rating from the DOM.
+*/
+
+$('#submitForm').on('click', function(event){
+  event.preventDefault();
+  
+  let title = $('#title').val();
+  let rating = $('#rating').val();
+  let movieDiv = $('<div></div>');
+  let deleteButton = $(`<button id='delete'>Delete Me</button>`);
+  
+  movieDiv.append(`Movie Title: ${title} <br />`);
+  movieDiv.append(`Movie Rating: ${rating} <br />`);
+  movieDiv.append(deleteButton);
+
+  $('body').append(movieDiv);
+
+  deleteButton.on('click', function (e){
+    $(e.target).closest('div').remove();
+  })
+})
+
+</script>
+</body>
+</html>
