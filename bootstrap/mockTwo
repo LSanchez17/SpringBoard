@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+    <title>Mockup Two</title>
+</head>
+<body>
+<nav class='navbar navbar-dark bg-dark navbar-expand-lg'>
+  <a class='navbar-brand'>LOGO</a>
+  <ul class='navbar-nav ml-auto'>
+    <li class='nav-item'>
+      <a class='nav-link' href='...'>Home</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='...'>Contact</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='...'>About Us</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href='...'>Message 12</a>
+    </li>
+  </ul>
+</nav>
+
+<h1>Dashboard:</h1>
+<div class='containter-fluid'>
+  <table class='table table-striped'>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Team</th>
+      <th>All Star</th>
+      <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Steph</td>
+      <td>Warriors</td>
+      <td>Yes</td>
+      <td>
+        <button class="btn btn-sm btn-danger">X</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Lebron</td>
+      <td>Cavaliers</td>
+      <td>Yes</td>
+      <td>
+        <button class="btn btn-sm btn-danger">X</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Dwayne</td>
+      <td>Heat</td>
+      <td>Yes</td>
+      <td>
+        <button class="btn btn-sm btn-danger">X</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Kobe</td>
+      <td>Lakers</td>
+      <td>Yes <span class="badge badge-warning">Last</span></td>
+      <td> 
+        <button class="btn btn-sm btn-danger">X</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Isaiah</td>
+      <td>Celtics</td>
+      <td>Yes <span class="badge badge-success">First</span></td>
+      <td>
+        <button class="btn btn-sm btn-danger">X</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<h2>Todos:</h2>
+
+<ul class='list-group'>
+  <li class='list-group-item list-group-item-success'>Feek good about Bootstrap</li>  
+  <li class='list-group-item list-group-item-info'>Feel informed about Bootstrap</li>
+  <li class='list-group-item list-group-item-warning'>Feel warned about Bootstrap</li>
+  <li class='list-group-item list-group-item-warning'>Maybe I should read the docs...</li>
+  <li class='list-group-item list-group-item-danger'>Danger Zone</li>
+  <li class='list-group-item list-group-item-danger'>I really shoul read the docs...</li>
+</ul>
+
+</body>
+</html>
