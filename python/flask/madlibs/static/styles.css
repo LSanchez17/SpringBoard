@@ -1,0 +1,21 @@
+body{
+  background-color: aqua;
+  text-align: center;
+}
+
+form{
+ background-color: antiquewhite;
+ border: 20%;
+ padding: 2%;
+}
+
+h3{
+  background-color: beige;
+  text-align: center;
+  text-shadow: black;
+}
+
+#content{
+  background-color: black;
+  border-radius: 5% solid;
+}
