@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogly</title>
+</head>
+<body>
+    {{tags}}
+
+    <div>
+        <h2>Posts</h2>
+        {% if posts %}
+            {% for p in posts %}
+            <h1>Title:<h2><a href='/post/{{p.posts_id}}'>{{p.title}}</a></h2></h1>
+                <p>{{p.content}}</p>
+                <h5>Created at: {{p.created_at}}</h5>
+                <h6>Create by: <a href='/info/{{p.user_id}}'>User {{p.user_id}}</a></h6>
+                <br />
+            {% endfor %}
+        {% endif %}
+    </div>
+    <a href='/users'>View Users</a>
+    <a href='/tags'>View Tags</a>
+</body>
+</html>
