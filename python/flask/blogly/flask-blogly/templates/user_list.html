@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>Users</h2>
+        <div>
+        {% if users %}
+            <ul>
+            {% for u in users %}
+            <div>
+              <ul>
+                <li>{{u.first_name}} {{u.last_name}}</li>
+                <div><img src={{u.image_url}} style='height:150px;width:150'/></div>
+                <a href='/info/{{u.user_id}}'>More Info</a>
+              </ul>
+            </div>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+
+    <a href='/createuser'>Add User</a>
+    <a href='/home'>Return Home</a>
+</body>
+</html>
