@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for p in pets %}    
+  <h3><a href='/edit/{{p.id}}''>{{p.name}}</a></h3>
+  <img src={{p.get_image()}} style='width:150px;height:200px'>
+    {% if p.available %}
+        <h3>I'm available!</h3>
+        <p>{{p.notes}}</p>
+    {% else %}
+        <h3>Pending Adoption</h3>
+    {% endif %}
+  {% endfor %}
+  <br />
+  <a href='/add'>Add new pets!</a>
+
+{% endblock %}
