@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your current cupcake:</h2>
+<div>
+    <h3>Cupcake Flavor: {{cupcake.flavor}}</h3>
+    <img src={{cupcake.get_image()}} style='width:125px;height:125px'>
+    <h4>Size: {{cupcake.size}}</h4>
+    <h4>Rating: {{cupcake.flavor}}</h3>
+</div>
+
+{% endblock %}
