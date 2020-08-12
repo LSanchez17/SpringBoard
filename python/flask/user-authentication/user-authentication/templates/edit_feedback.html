@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Current feedback:</h1>
+<h3>{{feedback.title}}</h3>
+<p>{{feedback.content}}</p>
+<br/>
+
+<form id='update-feedback-form' method='POST'>
+    {{form.hidden_tag() }}
+        {% for field in form 
+            if field.widget.input_type != 'hidden' %}
+        <div>
+        <h2>{{field.label}}</h2>
+        <p>{{field}}</p>
+        {% for error in field.errors %}
+            {{error}}
+        {% endfor %}
+        </div>
+        {% endfor %}
+    <button type='submit'>Submit Feedback</button>
+</form>
+<br />
+<button><a href='/feedback/{{feedback.id}}/delete'>Delete feedback</a></button>
+<button><a href='/users/{{feedback.username}}'>Go back</a></button>
+{% endblock %}

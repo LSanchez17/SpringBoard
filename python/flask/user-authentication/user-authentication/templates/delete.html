@@ -1,0 +1,12 @@
+{% extends 'delete.html' %}
+{% block content %}
+<h1>This cannot be undone, proceed with caution</h1>
+
+<form id='delete-user-form' methods='POST'>
+    <button type='submit'>Delete Entity</button>
+</form>
+
+<button><a href='/logout'>Logout</a></button>
+<button><a href='/users/{{username}}'>Go back</a></button>
+
+{% endblock %}

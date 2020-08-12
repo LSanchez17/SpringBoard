@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Welcome {{user.username}}!</h1>
+<h2>User information below:</h2>
+<div>
+<h3>Name: <p>{{user.first_name}} {{user.last_name}}</p></h3>
+<h3>Email: <a href='emailto:{{user.email}}'>{{user.email}}</a></h3>
+</div>
+<br />
+<h2>{{user.username}} Feedback:</h2>
+<div>
+{% for items in feedback %}
+<h3>Title: <a href='/feedback/{{items.id}}/update'>{{items.title}}</a></h3> 
+<p>{{items.content}}</p>
+{% endfor %}
+</div>
+<br />
+
+<button><a href='/users/{{user.username}}/delete'>Delete account</a></button>
+<button><a href='/logout'>Logout</a></button>
+<button><a href='/users/{{user.username}}/feedback/add'>Add Feedback</a></button>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add your feedback below!</h2>
+<form id='add-feedback-form' method='POST'>
+    {{form.hidden_tag() }}
+        {% for field in form 
+            if field.widget.input_type != 'hidden' %}
+        <div>
+        <h2>{{field.label}}</h2>
+        <p>{{field}}</p>
+        {% for error in field.errors %}
+            {{error}}
+        {% endfor %}
+        </div>
+        {% endfor %}
+        <button type='submit'>Add Feedback</button>
+    </form>
+
+<button><a href='/users/{{username}}'>Go back</a></button>
+
+{% endblock %}
