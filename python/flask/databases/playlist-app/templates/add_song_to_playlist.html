@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form id='add-new-song-form' method='POST'>
+    {{form.hidden_tag() }}
+        {% for field in form 
+            if field.widget.input_type != 'hidden' %}
+        <div>
+        <h2>{{field.label}}</h2>
+        <p>{{field}}</p>
+        {% for error in field.errors %}
+            {{error}}
+        {% endfor %}
+        </div>
+        {% endfor %}
+        <button class='btn btn-primary' type='submit'>Add Song</button>
+</form>
+
+<br />
+
+<button class='btn btn'><a href='/playlists'>Go back</a></button>
+
+{% endblock %}
