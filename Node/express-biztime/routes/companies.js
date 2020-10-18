@@ -1,47 +1,59 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const CompanyModel = require('../models/companyModel');
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try{
-        return res.send(JSON.stringify({ message: 'All Companies!'}));
+        let allCompanies = await CompanyModel.getAll();
+        return res.json(allCompanies);
     }
     catch(e){
         return next(e)
     }
 });
 
-router.get('/:code', (req, res, next) => {
-    /**Returns company code with invoice id */
+router.get('/:code', async (req, res, next) => {
+    /**Returns company based on company code*/
     try{
-        return res.send(JSON.stringify({ message: 'Particular Code!'}));
+        let individualCompany = await CompanyModel.oneCompany(req.params.code);
+        return res.json(individualCompany);
+    }
+    catch(e){
+        return next(e)
+    }
+});
+ 
+router.post('/', async (req, res, next) => {
+    try{
+        let {code,name,description} = req.body;
+        let madeCompany = await CompanyModel.createCompany(code, name, description);
+        return res.json(madeCompany)
     }
     catch(e){
         return next(e)
     }
 });
 
-router.post('/', (req, res, next) => {
+router.patch('/:code/update', async (req, res, next) => {
     try{
-        return res.send(JSON.stringify({ message: 'Company Created!'}));
+        let updatedCompany = await CompanyModel.oneCompany(req.params.code);
+        updatedCompany.name = req.body.name;
+        updatedCompany.description = req.body.description;
+
+        console.log(`Current model: name:${updatedCompany.name}, desc:${updatedCompany.description}`)
+        let result = await updatedCompany.update();
+        return res.json(result);
     }
     catch(e){
         return next(e)
     }
 });
 
-router.put('/:code', (req, res, next) => {
+router.delete('/:code', async (req, res, next) => {
     try{
-        return res.send(JSON.stringify({ message: 'Copmany Edited!'}));
-    }
-    catch(e){
-        return next(e)
-    }
-});
-
-router.delete('/:code', (req, res, next) => {
-    try{
-        return res.send(JSON.stringify({ message: 'Deleted Company!'}));
+        let deletedCompany = await CompanyModel.oneCompany(req.params.code);
+        let message = await deletedCompany.deleteCompany();
+        return res.json(message);
     }
     catch(e){
         return next(e)

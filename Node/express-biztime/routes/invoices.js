@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const InvoiceModel = require('../models/invoiceModel');
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try{
-        return res.send(JSON.stringify({ message: 'Invoices!'}));
+        let allInvoices = await InvoiceModel.getAll();
+        return res.json(allInvoices);
     }
     catch(e){
         return next(e)
