@@ -1,0 +1,55 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+
+<div>
+ <ul id='cupcakeList' class='container card'>
+ </ul>
+</div>
+
+<br />
+
+<div class='container card'>
+    <form class='form-group' id='singleCupcake' methods='GET'>
+    <div class='form-group'>
+        <label for='cupcakeId'>Enter Cupcake Id:</label>
+        <input class='form-control' type='text' name='cupcakeId' id='ckId'>
+    </div>
+    <button class='btn btn-primary' type='submit'>Get individual cupcake</button>
+</form>
+</div>
+
+<br />
+
+<div class='container card'>
+    <form class='form-group' id='allCupcakes' methods='GET'>
+    <div class='form-group'></div>
+    <button class='btn btn-primary' type='submit'>Get all cupcakes</button>
+</form>
+</div>
+
+<br />
+
+<div class='container card'>
+<form class='form-group' id='postCupcake' methods='POST'>
+    <div class='form-group'>
+        <label for='cupcakeFlavor'>Cupcake flavor:</label>
+        <input class='form-control' type='text' name='cupcakeFlavor' id='ckFlavor'>
+    </div>
+    <div class='form-group'>
+        <label for='cupcakeSize'>Cupcake size:</label>
+        <input class='form-control' type='text' name='cupcakeSize' id='ckSize'>
+    </div>
+    <div class='form-group'>
+        <label for='cupcakeRating'>Cupcake rating:</label>
+        <input class='form-control' type='number' name='cupcakeRating' id='ckRating'>
+    </div>
+    <div class='form-group'>
+        <label for='cupcakeImage'>Cupcake Image:</label>
+        <input class='form-control'type='text' name='cupcakeImage' id='ckImage'>
+    </div>
+    <button class='btn btn-primary' type='submit'>Submit new cupcake</button>
+</form>
+</div>
+
+{% endblock %}
