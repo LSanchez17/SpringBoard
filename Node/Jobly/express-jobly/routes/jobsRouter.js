@@ -1,6 +1,9 @@
 const express = require('express');
 const Jobs = require('../models/jobsModel');
 const {authenticateUser, isAdminCheck} = require('../middleware/authenticate');
+const {validate} = require('jsonschema');
+const {newJobSchema, updateJobSchema} = require('../schemas/index');
+const ExpressError = require('../helpers/ExpressError');
 const router = new express.Router();
 
 router.get('/', authenticateUser, async (req, res, next) => {
@@ -40,6 +43,12 @@ router.get('/:id', authenticateUser, async (req, res, next) => {
 router.post('/', isAdminCheck, async (req, res, next) => {
     //post a job, need authentication
     try{
+        let validation = validate(req.body, newJobSchema);
+
+        if(!validation.valid){
+            throw new ExpressError(validation.errors.map(err => err.stack), 400);
+        }
+
         let jobPosting = await Jobs.postJob(req.body);
         return res.json({jobs: jobPosting});
     }
@@ -51,6 +60,12 @@ router.post('/', isAdminCheck, async (req, res, next) => {
 router.patch('/:id', isAdminCheck, async (req, res, next) => {
     //uodate a job, needs authentication
     try{
+        let validation = validate(req.body, updateJobSchema);
+
+        if(!validation.valid){
+            throw new ExpressError(validation.errors.map(err => err.stack), 400);
+        }
+
         let updateJobPosting = await Jobs.updateJob(req.params.id, req.body);
         if(updateJobPosting){
             return res.json({jobs: updateJobPosting})

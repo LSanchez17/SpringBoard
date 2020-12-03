@@ -1,6 +1,9 @@
 const express = require('express');
 const Companies = require('../models/companiesModel');
 const {authenticateUser, isAdminCheck} = require('../middleware/authenticate');
+const { validate } = require('jsonschema');
+const { newCompanySchema, updateCompanySchema } = require('../schemas/index');
+const ExpressError = require('../helpers/ExpressError');
 const router = new express.Router();
 
 router.get('/', authenticateUser, async (req, res, next) => {
@@ -25,6 +28,12 @@ router.get('/', authenticateUser, async (req, res, next) => {
 router.post('/', isAdminCheck, async (req, res, next) => {
     //creates a new company and returns it to user
     try{
+        let validation = validate(req.body, newCompanySchema);
+
+        if(!validation.valid){
+            throw new ExpressError(validation.errors.map(err => err.stack), 400);
+        }
+        
         let companyData = await Companies.create(req.body);
         return res.json({company: companyData});
     }
@@ -50,6 +59,12 @@ router.get('/:handle', authenticateUser, async (req, res, next) => {
 router.patch('/:handle', isAdminCheck ,async (req, res, next) => {
     //Update company info via handle param
     try{
+        let validation = validate(req.body, updateCompanySchema);
+
+        if(!validation.valid){
+            throw new ExpressError(validation.errors.map(err => err.stack), 400);
+        }
+
         let updatedCompany = await Companies.updateCompany(req.params.handle, req.body);
         if(updatedCompany){
             return res.json({company: updatedCompany});
