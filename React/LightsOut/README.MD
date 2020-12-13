@@ -1,0 +1,2 @@
+# Lights Out React Application
+Lights out is a game where you win when all the lights are out.  Lights are toggled off by a click, but in doing so, toggle the surrounding lights on(up,down,left,right).  Comes with a board component and a cells component.
