@@ -7,7 +7,7 @@ const Todo = ({task, id, remove}) => {
     return(
         <div>
             <p>My task is {task}!</p>
-            <button onClick={deleteTodo}>X</button>
+            <button onClick={deleteTodo}>I finished!</button>
         </div>
     )
 }

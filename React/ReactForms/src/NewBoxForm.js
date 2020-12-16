@@ -38,14 +38,14 @@ const NewBoxForm = ({addBox}) => {
     return (
         <div>
             <form onSubmit={submitForm}>
-                <label htmlFor='Box Color'>Box Color</label>
-                <input type='text' name='color' onChange={handleBoxChanges} value={formData.color}/>
+                <label htmlFor='BoxColor'>Box Color</label>
+                <input type='text' name='color' id='BoxColor' onChange={handleBoxChanges} value={formData.color}/>
 
-                <label htmlFor='Box Width'>Box Width</label>
-                <input type='text' name='width' onChange={handleBoxChanges} value={formData.width}/>
+                <label htmlFor='BoxWidth'>Box Width</label>
+                <input type='text' name='width' id='BoxWidth' onChange={handleBoxChanges} value={formData.width}/>
                 
-                <label htmlFor='Box Height'>Box Height</label>
-                <input type='text' name='height' onChange={handleBoxChanges} value={formData.height}/>
+                <label htmlFor='BoxHeight'>Box Height</label>
+                <input type='text' name='height' id='BoxHeight' onChange={handleBoxChanges} value={formData.height}/>
                 
                 <button type='submit'>Submit</button>
             </form>

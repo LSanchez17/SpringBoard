@@ -11,10 +11,36 @@ it('passes the snapshot', () => {
     expect(aFragment).toMatchSnapshot();
 })
 
-it('submits box data', () => {
-    const {queryByText, getByLabelText} = render(<Boxlist />);
+it('handles box logic', () => {
+    const {getByText, getByLabelText, queryByText, getByTestId} = render(<Boxlist />);
+    //labelText matches only if the text we search is in the <label>TEXT</label>
+    //We also need to add an id matching the htmlFor/for name in the label
+    //<label htmlFor='test'>Test</label> <input ... id='test' />
+    //then getByLabelText('Test') to acquire the input!
     const colorInput = getByLabelText('Box Color');
     const heightInput = getByLabelText('Box Height');
     const widthInput = getByLabelText('Box Width');
-    const submitButton = getByQueryText('Submit')
+    const submitButton = getByText('Submit');
+
+    //No box with rendered remove test should be here
+    const missingBox = queryByText('Box Begone');
+    expect(missingBox).not.toBeInTheDocument();
+
+    //create a new box
+    fireEvent.change(colorInput, { target: { value: 'Red' }});
+    fireEvent.change(heightInput, { target: { value: 50 }});
+    fireEvent.change(widthInput, { target: { value: 50 }});
+
+    //submit new box
+    fireEvent.click(submitButton);
+
+    //check for box to render, check color matching submitted value
+    const renderedBox = getByTestId('Red');
+    expect(renderedBox).toBeInTheDocument();
+
+    //now remove the box
+    const removeButton = getByText('Box Begone');
+    fireEvent.click(removeButton);
+
+    expect(renderedBox).not.toBeInTheDocument();
 })

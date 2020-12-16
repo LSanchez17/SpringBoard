@@ -18,9 +18,9 @@ const Box = ({id, color, width, height, remove}) => {
 
     return (
         <div className="App">
-          <div id={color} style={boxStyle}>
+          <div id={color} style={boxStyle} data-testid={color}>
             <p>Im the box</p>
-            <button onClick={boxBegone}>X</button>
+            <button onClick={boxBegone}>Box Begone</button>
           </div>
         </div>
     );

@@ -29,7 +29,7 @@ const NewTodoForm = ({addTodo}) => {
         <div>
             <form onSubmit={handleSubmission}>
                 <label htmlFor='todo'>Add a todo:</label>
-                <input type='text' name='todo' onChange={handleFormChange} value={todo.todo} />
+                <input type='text' name='todo' id='todo' onChange={handleFormChange} value={todo.todo} />
                 <button type='submit'>Submit</button>
             </form>
             
