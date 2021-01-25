@@ -66,7 +66,9 @@ class User {
 
     const user = result.rows[0];
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    let pass = await bcrypt.compare(password, user.password);
+
+    if (user && pass  ) {
       return user;
     } else {
       throw new ExpressError('Cannot authenticate', 401);

@@ -83,14 +83,29 @@ describe("POST /auth/login", function() {
         username: "u1",
         password: "pwd1"
       });
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({ token: expect.any(String) });
+    expect(response.statusCode).not.toBe(200);
+    expect(response.body).not.toEqual({ token: expect.any(String) });
 
     let { username, admin } = jwt.verify(response.body.token, SECRET_KEY);
     expect(username).toBe("u1");
     expect(admin).toBe(false);
   });
 });
+
+////BUG #1
+describe("POST /auth/login", function(){
+  test('Should not allow an incorrect password to log in', async () => {
+    const resp = await request(app)
+    .post('/auth/login')
+    .send({
+      username:'u1',
+      password:'badPass'
+    });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({token: expect.any(String)});
+  })
+})
+////
 
 describe("GET /users", function() {
   test("should deny access if no token provided", async function() {
