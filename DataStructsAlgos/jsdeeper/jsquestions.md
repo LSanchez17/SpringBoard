@@ -10,6 +10,7 @@
     console.log("a defined? " + (typeof a !== 'undefined'));
     console.log("b defined? " + (typeof b !== 'undefined'));
     ```
+
     b is defined, while a, is not.  This is because of the shorthand statement inside the scope of the function. Since we don't declare what b IS, it is elevated to a global variable, able to be accessed outside the functions scope, yikes!
 
 # 3 What does this output?
@@ -110,14 +111,120 @@
     ```
     Runtime, **O(n)** where n is the string length.
 
-# 12
-# 13
-# 14
-# 15
-# 16
-# 17
-# 18
-# 19
+# 12 Write a *sum* method which will work properly when called with either syntax
+    ```
+        console.log(sum(2,3));
+        console.log(sum(2)(3));
+    ```
+    We can use the **arguments** object, that lets us disect the parameters being passed in. So we can try this
+    
+    ``` 
+        const sum(nums) => {
+            if(arguements.length === 2){
+                return arguments[0] + arguments[1];
+            }
+            else{
+                return ((y) => { return x + y });
+            }
+        }
+    ```
+
+# 13 What happens when the user clicks on Button 4 and why?
+    ```
+    for (var i = 0; i < 5; i++) {
+        var btn = document.createElement('button');
+        btn.appendChild(document.createTextNode('Button ' + i));
+        btn.addEventListener('click', function(){ console.log(i); });
+        document.body.appendChild(btn);
+   }
+    ```
+    oof, well first, no **var** please.  Not local context, so the variable itself is set to 5, and the eventListeners will echo 5 each time they get clicked on.  
+    You can fixt this by using modern JS syntax , and watching your scope, which will avoid this jumbled mess.
+
+# 14  Assuming *D* is an "empty" object in scope, what is accomplished below
+    ```
+        var d = {};
+        ['zebra', 'horse'].forEach((k) => {
+            d[k] = undefined;
+        })
+    ```
+    We assign *d* the keys of zebra and horse, and they each are undefined.  This is a shorthand way to assign keys to objects if they dont have it. Commonly seen in frequency counter problems.
+
+# 15 What will this output?
+    ```
+        var arr1 = "john".split('');
+        var arr2 = arr1.reverse();
+        var arr3 = "jones".split('');
+        arr2.push(arr3);
+        console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1));
+        console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1));
+    ```
+    You will get: 
+        'array 1: length=5 last=j,o,n,e,s'
+        'array 2: length=5 last=j,o,n,e,s'
+    It is due to the fact that arrays are merely references, and unless we declare a new array, it is a reference.  So anything we do the arr1, will be shown through arr2, and arr3.
+    Also to note, *pushing* to an array, inserts the element as **ONE** element, not an array *concatination*.
+
+# 16  What will this output?
+    ```
+        console.log(1 +  "2" + "2");
+        console.log(1 +  +"2" + "2");
+        console.log(1 +  -"1" + "2");
+        console.log(+"1" +  "1" + "2");
+        console.log( "A" - "B" + "2");
+        console.log( "A" - "B" + 2);
+    ```
+    Oh boy:
+        * '122';
+        * '32';
+        * '02';
+        * '112';
+        * 'NaN2';
+        * NaN;
+    Thanks to JS being loosely typed, and its love for automatic type conversions, we get this menagerie of answers.
+    The first log, concats the *1 + "2"* into **"22"**, and then concats the last *"2"*.
+    The second one, JS thinks the *+"2"* is trying to be coerced to an integer, so it does just that.  This leads to *3 + "2"*, which coerces to string, and results in "32".
+    Third log, is similar to previous one, with the exception of it being negative.
+    The fourth is due to the first string becoming a number, but then getting converted back to a string, and being concatinated.
+    The fifth log, you cannot subtract strings, so it returns *"NaN"*, but hold your horses, because *"NaN"* can be concatenated with *"2"*, so we get **'NaN2"**.
+    The last log, similar, but since you cannot add *NaN* to an actual number, we just get back *NaN*.
+
+# 17 How can we avoid a stack overflow in the following code?
+    ```
+        var list = readHugeList();
+
+        var nextListItem = function() {
+            var item = list.pop();
+
+            if (item) {
+                // process the list item...
+                nextListItem();
+            }
+            };
+    ```
+    You could add a *setTimeout* function call that takes the *nextListItem* as its parameter.  This helps keep the stack from overflowing, by having the event queue take care of the calls, versus the actual stack.
+
+# 18  What is closure? Give an example
+    Closure is when an inner function has access to variables defined in its parent function.  This happens when the variables is in either its own scope, its inside the current scope, and the variable can be Global. Example:
+    
+    ```
+        const outerScope = (lexicon) => {
+            let dictionaries = {...lexicon};
+
+            const innerScope = > (innerLexicon) => {
+                return ({dictionaries, innerLexicon});
+            }
+        }
+    ```
+
+# 19 What will this code do?
+    ```
+        for (var i = 0; i < 5; i++) {
+	        setTimeout(function() { console.log(i); }, i * 1000 );
+        } 
+    ```
+    It will display 5, five times.  This is due to the loop being run faster than the actual time it takes for the *setTimeout* function to **Actually** execute.
+
 # 20
 # 21
 # 22
