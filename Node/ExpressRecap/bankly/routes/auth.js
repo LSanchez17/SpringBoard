@@ -18,8 +18,9 @@ const createTokenForUser = require('../helpers/createToken');
 
 router.post('/register', async function(req, res, next) {
   try {
-    const { username, password, first_name, last_name, email, phone } = req.body;
-    let user = await User.register({username, password, first_name, last_name, email, phone});
+    //fixes bug #1
+    const { username, password, first_name, last_name, email, phone, isAdmin } = req.body;
+    let user = await User.register({username, password, first_name, last_name, email, phone, isAdmin});
     const token = createTokenForUser(username, user.admin);
     return res.status(201).json({ token });
   } catch (err) {
@@ -40,11 +41,10 @@ router.post('/register', async function(req, res, next) {
 router.post('/login', async function(req, res, next) {
   try {
     const { username, password } = req.body;
-    let user = User.authenticate(username, password);
-    if(user){
-      const token = createTokenForUser(username, user.admin);
-      return res.json({ token });
-    }
+    //Didn't await user.authenticate
+    let user = await User.authenticate(username, password);
+    const token = createTokenForUser(user.username, user.admin);
+    return res.json({ token });
   } catch (err) {
     return next(err);
   }

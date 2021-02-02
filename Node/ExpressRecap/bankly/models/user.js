@@ -8,7 +8,7 @@ class User {
 
 /** Register user with data. Returns new user data. */
 
-  static async register({username, password, first_name, last_name, email, phone}) {
+  static async register({username, password, first_name, last_name, email, phone, isAdmin}) {
     const duplicateCheck = await db.query(
       `SELECT username 
         FROM users 
@@ -25,18 +25,24 @@ class User {
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
+    //Bug #1
+    if(isAdmin === null || isAdmin === undefined){
+      isAdmin = false;
+    }
+
     const result = await db.query(
       `INSERT INTO users 
-          (username, password, first_name, last_name, email, phone) 
-        VALUES ($1, $2, $3, $4, $5, $6) 
-        RETURNING username, password, first_name, last_name, email, phone`,
+          (username, password, first_name, last_name, email, phone, admin) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7) 
+        RETURNING username, password, first_name, last_name, email, phone, admin`,
       [
         username,
         hashedPassword,
         first_name,
         last_name,
         email,
-        phone
+        phone,
+        isAdmin
       ]
     );
 
@@ -66,9 +72,7 @@ class User {
 
     const user = result.rows[0];
 
-    let pass = await bcrypt.compare(password, user.password);
-
-    if (user && pass  ) {
+    if (user && (await bcrypt.compare(password, user.password))) {
       return user;
     } else {
       throw new ExpressError('Cannot authenticate', 401);
@@ -80,8 +84,8 @@ class User {
    * [{username, first_name, last_name, email, phone}, ...]
    *
    * */
-
-  static async getAll(username, password) {
+  //Bug Fix, parameters username and password not needed.
+  static async getAll() {
     const result = await db.query(
       `SELECT username,
                 first_name,
@@ -115,7 +119,8 @@ class User {
     const user = result.rows[0];
 
     if (!user) {
-      new ExpressError('No such user', 404);
+      //Bug fix, doesn't throw express error
+      throw new ExpressError('No such user', 404);
     }
 
     return user;
@@ -130,6 +135,12 @@ class User {
    **/
 
   static async update(username, data) {
+    // console.log(data.password)
+    //BugFix hash password if it exists!
+    if(data.password){
+      data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
+    }
+
     let { query, values } = sqlForPartialUpdate(
       'users',
       data,
