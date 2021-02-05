@@ -39,6 +39,18 @@ function App() {
     return <p>Loading &hellip;</p>;
   }
 
+  const addNewFood = async (data) => {
+    let type = '';
+    console.log(data);
+    for(let key in data){
+      key === 'type' ? type=data[key] : type=null;
+    }
+
+    delete data.type;
+
+    await SnackOrBoozeApi.addFoodItem(data, type);
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -50,7 +62,7 @@ function App() {
             </Route>
 
             <Route exact path='/addFood'>
-              <CreateNewItem />
+              <CreateNewItem addNewFood={addNewFood}/>
             </Route>
             {/* Menu for Snacks below */}
             <Route exact path="/snacks">

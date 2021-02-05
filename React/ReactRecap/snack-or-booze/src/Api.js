@@ -49,9 +49,10 @@ class SnackOrBoozeApi {
   //data is the id, name, description, recipe, serve
   //type is which, snack or drink
   static async addFoodItem(data, type){
-    await axios.post(`${BASE_API_URL}/${type}`);
+    console.log('data incoming', data, type);
+    await axios.post(`${BASE_API_URL}/${type}`, data);
 
-    return ({message:'Thank you!'});
+    console.log({message:'Thank you!'});
   }
 }
 
