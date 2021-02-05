@@ -4,16 +4,23 @@ import SnackOrBoozeApi from './Api';
 
 
 function Home() {
-  const [itesmOffered, setItemsOffered] = useState();
+  const [itemsOffered, setItemsOffered] = useState();
+  const [snacksOffered, setSnacksOffered] = useState();
+  const [drinksOffered, setDrinksOffered] = useState();
 
   useEffect(() => {
     const getTotalItems = async () => {
-      let totalItemsOffered = await SnackOrBoozeApi.getTotalCount();
+      let {totalItems, drinks, snacks} = await SnackOrBoozeApi.getTotalCount();
       
-      setItemsOffered(totalItemsOffered);
+      setItemsOffered(totalItems);
+      setSnacksOffered(snacks);
+      setDrinksOffered(drinks);
+      
     }
     getTotalItems();
   }, []);
+
+  console.log(itemsOffered)
 
   return (
     <section className="col-md-8">
@@ -25,7 +32,16 @@ function Home() {
             </h3>
           </CardTitle>
           <CardText className='text-center'>
-            <p>We currently carry: {itesmOffered} different items!</p>
+            { itemsOffered !== null && snacksOffered !== null && drinksOffered !== null 
+             ?
+              <div>
+                <h1>We currently carry: {itemsOffered} different items!</h1>
+                <h3>There are: {snacksOffered} snacks available!</h3>
+                <h3>There are: {drinksOffered} drinks available!</h3>
+              </div>
+             :
+              <h2>Loading...</h2>
+          }
           </CardText>
         </CardBody>
       </Card>

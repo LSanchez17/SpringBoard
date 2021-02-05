@@ -7,12 +7,22 @@ import NavBar from "./NavBar";
 import { Route, Switch } from "react-router-dom";
 import Menu from "./FoodMenu";
 import Food from "./FoodItem";
+import Component404 from './404Component';
+import CreateNewItem from './CreateNewItem';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  // const [snacks, setSnacks] = useState([]);
-  // const [drinks, setDrinks] = useState([]);
+  /*
+  *  The main change was turning the snacks useState() into a generalized
+  *  useState() component. The component is then called upon during a useEffect()
+  *  call.  In there we query the API and get a list, containing two items.
+  *  The items inside are the Snacks Objects, and Drinks Object.
+  *  These are then passed down depending on which category a user picks.
+  *  If snacks are picked, they see snacks, if drinks, they see drinks.
+  *  404 Routes are rerouted to a 404 component.
+  */
 
+
+  const [isLoading, setIsLoading] = useState(true);
   const [food, setFood] = useState();
 
   useEffect(() => {
@@ -24,24 +34,6 @@ function App() {
     }
     getFoodItems();
   }, []);
-
-  // useEffect(() => {
-  //   async function getSnacks() {
-  //     let snacks = await SnackOrBoozeApi.getSnacks();
-  //     setSnacks(snacks);
-  //     setIsLoading(false);
-  //   }
-  //   getSnacks();
-  // }, [])
-
-  // useEffect(() => {
-  //   async function getDrinks() {
-  //     let drinks = await SnackOrBoozeApi.getDrinks();
-  //     setDrinks(drinks);
-  //     setIsLoading(false);
-  //   }
-  //   getDrinks();
-  // }, []);
 
   if (isLoading) {
     return <p>Loading &hellip;</p>;
@@ -56,11 +48,14 @@ function App() {
             <Route exact path="/">
               <Home foods={food} />
             </Route>
+
+            <Route exact path='/addFood'>
+              <CreateNewItem />
+            </Route>
             {/* Menu for Snacks below */}
             <Route exact path="/snacks">
               <Menu foods={food[0]} type={'snacks'} title="Snacks" />
             </Route>
-
 
             <Route path="/snacks/:id">
               <Food items={food[0]} cantFind="/snacks" />
@@ -75,9 +70,8 @@ function App() {
               <Food items={food[1]} cantFind="/drinks" />
             </Route>
 
-            <Route>
-              <p>Hmmm. I can't seem to find what you want.</p>
-            </Route>
+            {/* 404 Component below */}
+            <Route component={Component404} />
           </Switch>
         </main>
       </BrowserRouter>

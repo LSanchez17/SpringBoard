@@ -11,10 +11,11 @@ function NavBar() {
           Snack or Booze
         </NavLink>
 
-        <Nav className="ml-auto" navbar>
+        <Nav className="ml" navbar>
           <NavItem>
             <NavLink to="/snacks">Snacks</NavLink>
             <NavLink to='/drinks'>Drinks</NavLink>
+            <NavLink to='/addFood'>AddFood</NavLink>
           </NavItem>
         </Nav>
       </Navbar>

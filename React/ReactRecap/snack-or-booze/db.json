@@ -27,6 +27,16 @@
       "description": "Crisp!",
       "recipe": "Open can.",
       "serve": "Immediately."
+    },
+    {
+      "id": "7UHQ40_"
+    },
+    {
+      "id": "limearita",
+      "name": "Lime margarita",
+      "description": "a classy drink",
+      "recipe": "buy it",
+      "serve": "near freezing"
     }
   ],
   "snacks": [
