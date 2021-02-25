@@ -33,6 +33,7 @@ class JoblyApi {
     //url structure companies/:whichCompany
     static async getCompany(whichCompany){
         let res = await this.request(`companies/${whichCompany}`);
+        console.log(res)
         return res.company;
     }
 

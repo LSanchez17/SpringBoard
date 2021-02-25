@@ -6,6 +6,7 @@ import Jobs from './Jobs';
 import Profile from './Profile';
 import Register from './Register';
 import Login from './Login';
+import Company from './Company';
 
 const Routes = () => {
     return (
@@ -18,6 +19,11 @@ const Routes = () => {
             <Route path='/companies' exact>
                 {/* All companies */}
                 <Companies />
+            </Route>
+
+            <Route path='/companies/:companyName'>
+                {/* Specific company */}
+                <Company />
             </Route>
 
             <Route path='/jobs' exact>

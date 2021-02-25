@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Company from './Company';
 import JoblyApi from './helpers/backEndAPI';
+import {Link} from 'react-router-dom';
 
 const Companies = () => {
     //make a call to apiHelper
@@ -18,11 +19,14 @@ const Companies = () => {
     }, []);
 
     let companyRender = listCompanies.length > 0 ? listCompanies.map(company => {
-        return <Company key={company.handle} 
+        return <div>
+                <Link to={`/companies/${company.handle}`}>{company.name}</Link>
+                <Company key={company.handle} 
                         name={company.name}
                         description={company.description}
                         numEmployees={company.numEmployees}
                         imageURL={company.imageURL} />
+                </div>
         }) : null;
 
     return (
