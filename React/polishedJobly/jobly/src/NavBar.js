@@ -5,7 +5,7 @@ import {useHistory} from 'react-router';
 //Routes for the application, in a navigation bar
 const NavBar = () => {
     //if logged in, display other routes, else just two
-    let loggedIn = false;
+    let loggedIn = true;
     let history = useHistory();
 
     const logOut = () => {
