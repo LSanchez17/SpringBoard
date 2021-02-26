@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import JoblyApi from './helpers/backEndAPI';
+import SearchBar from './SearchBar';
 import Job from './Job';
 
 const Jobs = () => {
     //make a call to apiHelper
     //render the jobs as individual props with their own link
     let [listJobs, setListJobs] = useState([]);
+    let [specificJob, setSpecificJob] = useState([]);
 
     useEffect( () => {
         const getAllJobs = async () => {
@@ -25,8 +27,16 @@ const Jobs = () => {
                         company={job.companyName} />
         }) : null;
     
+    const search = async (searchTerm) => {
+        let data = await JoblyApi.getSpecificJob(searchTerm);
+        setSpecificJob(data);
+        jobRender = specificJob;
+    }
+
     return (
         <div>
+            <SearchBar type='job'/>
+            <br />
             {jobRender ? jobRender : <b>Loading...</b>}\
         </div>
     );

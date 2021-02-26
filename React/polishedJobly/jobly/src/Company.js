@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import JoblyApi from './helpers/backEndAPI';
 import {useParams} from 'react-router-dom';
+import Job from './Job';
 
-const Company = ({name = '', description = '', numEmployees = '', imageURL = ''}) => {
-    let [companyData, setCompanyData] = useState();
+const Company = ({name = ''}) => {
+    let [companyData, setCompanyData] = useState([]);
+    let [companyJobs, setCompanyJobs] = useState([]);
+    let paramName = useParams().companyName;
+    let companyHandle = name ? name : paramName;
 
-    let companyHandle = useParams().companyName;
-    console.log(companyHandle)
-        
     useEffect( () => {
         const getOneCompany = async () => {
             let data = await JoblyApi.getCompany(companyHandle);
             console.log(data)
             setCompanyData(data);
-        }
-        
-        
+        }        
+    
         getOneCompany();
-        }, []);
 
-    if(!name){
-        return (
+        const getCompanyJobs = async () => {
+            let jobs = await JoblyApi.getCompanyJobs(companyHandle);
+            setCompanyJobs(jobs);
+        }
+
+        getCompanyJobs();
+    }, []);
+
+    let renderedJobs = companyJobs.length > 0 ? companyJobs.map(job => {
+        return <div>
+                   <Job title={job.title}
+                        salary={job.salary}
+                        equity={job.equity}
+                        company={job.Company} />
+               </div>
+    }) : <b>loading...</b>;
+
+    return (
+        <div>
             <div>
                 <h3>{companyData.name}</h3>
                 <p>{companyData.description}</p>
@@ -28,19 +44,12 @@ const Company = ({name = '', description = '', numEmployees = '', imageURL = ''}
                 <br />
                 <img src={companyData.imageURL} alt={`${companyData.name} company`}></img>
             </div>
-        )
-    }
-    else{
-        return (
+
             <div>
-                <h3>{name}</h3>
-                <p>{description}</p>
-                <small>{numEmployees} Employees</small>
-                <br />
-                <img src={imageURL} alt={`${name} company`}></img>
+                {renderedJobs}
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Company;
