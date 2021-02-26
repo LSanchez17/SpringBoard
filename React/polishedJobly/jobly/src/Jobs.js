@@ -7,17 +7,16 @@ const Jobs = () => {
     //make a call to apiHelper
     //render the jobs as individual props with their own link
     let [listJobs, setListJobs] = useState([]);
-    let [specificJob, setSpecificJob] = useState([]);
 
     useEffect( () => {
         const getAllJobs = async () => {
             let data = await JoblyApi.getJobs();
             setListJobs(data);
-            console.log(listJobs)
+            // console.log(listJobs)
         }
 
         getAllJobs();
-    }, []);
+    }, [setListJobs]);
 
     let jobRender = listJobs.length > 0 ? listJobs.map(job => {
         return <Job key={job.id} 
@@ -27,16 +26,16 @@ const Jobs = () => {
                         company={job.companyName} />
         }) : null;
     
-    const search = async (searchTerm) => {
+    const search = async (searchTerm = {}) => {
         let data = await JoblyApi.getSpecificJob(searchTerm);
-        setSpecificJob(data);
-        jobRender = specificJob;
+        // console.log(data)
+        setListJobs(data);
     }
 
     return (
         <div>
-            <SearchBar type='job'/>
-            <br />
+            <SearchBar type='job' search={search}/>
+        <br />
             {jobRender ? jobRender : <b>Loading...</b>}\
         </div>
     );

@@ -18,6 +18,12 @@ export const applyToJob = (jobId) => {
 }
 
 export const logOut = () => {
+    return (async () => {
+        return dispatchEvent(leaveSite);
+    })
+}
+
+const leaveSite = () => {
     return {
         type: LOGOUT
     };

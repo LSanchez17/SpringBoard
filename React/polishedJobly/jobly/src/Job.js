@@ -7,6 +7,7 @@ const Job = ({title, salary, equity, company}) => {
             <h4>${salary}</h4>
             <h4>equity: {equity ? equity : <small>None</small>}</h4>
             <p>{company}</p>
+            <button>Apply</button>
         </div>
     );
 }

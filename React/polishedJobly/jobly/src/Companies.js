@@ -7,8 +7,10 @@ const Companies = () => {
     //make a call to apiHelper
     //render the companies as individual props with their own link
     let [listCompanies, setListCompanies] = useState([]);
-    let [specificCompany, setSpecificCompany] = useState([]);
 
+    //This hook will render every company at first
+    //Then if we submit a search term, we search the api
+    //and reset the state, so a render of JUST the search term
     useEffect( () => {
         const getAllCompanies = async () => {
             let data = await JoblyApi.getAllCompanies();
@@ -17,7 +19,7 @@ const Companies = () => {
         }
 
         getAllCompanies();
-    }, []);
+    }, [setListCompanies]);
 
     let companyRender = listCompanies.length > 0 ? listCompanies.map(company => {
         return <div key={company.handle}>
@@ -29,10 +31,10 @@ const Companies = () => {
                 </div>
         }) : null;
 
-    const search = async (searchTerm) => {
-        let data = await JoblyApi.getCompany(searchTerm);
-        setSpecificCompany(data);
-        companyRender = specificCompany;
+    const search = async (searchTerm = {}) => {
+        // console.log(searchTerm)
+        let data = await JoblyApi.getCompanyFromSearch(searchTerm);
+        setListCompanies(data);
     }
 
     return (
