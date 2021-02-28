@@ -8,12 +8,12 @@ function App() {
   let reduxToken = useSelector(currState => currState.token);
   const dispatch = useDispatch();
 
-  console.log(reduxToken)
   //logout, clear username, push to main page
   const userLogOut = async () => {
     //logs user out, pushes to main page
     // console.log('im the parent')
     dispatch(logOut(reduxToken));
+    JoblyApi.token = null;
     return;
   }
 
@@ -43,10 +43,22 @@ function App() {
     }
   }
 
+  const updateUserData = async(username, info) => {
+    console.log(username, info)
+    try{
+      await JoblyApi.updateUserInfo(username, info);
+      return;
+    } 
+    catch(e){
+      console.log(`Error:${e}`);
+      return;
+    }
+  }
+
   return (
     <div>
       <NavBar loggedIn={reduxToken} logMeOut={userLogOut}/>
-      <Routes signup={signUserUp} login={letUserPass}/>
+      <Routes signup={signUserUp} login={letUserPass} updateUser={updateUserData} token={reduxToken}/>
     </div>
   );
 }

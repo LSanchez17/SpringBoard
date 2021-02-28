@@ -1,5 +1,6 @@
 import React from 'react';
 import {Switch, Redirect, Route} from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 import Companies from './Companies';
 import HomePage from './HomePage';
 import Jobs from './Jobs';
@@ -8,39 +9,39 @@ import Register from './Register';
 import Login from './Login';
 import Company from './Company';
 
-const Routes = ({signup, login}) => {
+const Routes = ({signup, login, updateUser, token}) => {
     return (
         <Switch>
-            <Route path='/' exact>
+            <Route exact path='/'>
                 {/* HomePage */}
-                <HomePage />
+                <HomePage token={token}/>
             </Route>
 
-            <Route path='/companies' exact>
+            <PrivateRoute exact path='/companies'>
                 {/* All companies */}
                 <Companies />
-            </Route>
+            </PrivateRoute>
 
-            <Route path='/companies/:companyName'>
+            <PrivateRoute exact path='/companies/:companyName'>
                 {/* Specific company */}
                 <Company />
-            </Route>
+            </PrivateRoute>
 
-            <Route path='/jobs' exact>
+            <PrivateRoute exact path='/jobs'>
                 {/* List of All jobs */}
                 <Jobs />
-            </Route>    
+            </PrivateRoute>    
 
-            <Route path='/profile' exact>
+            <PrivateRoute exact path='/profile'>
                 {/* Profile page for updating user info */}
-                <Profile />
-            </Route>
+                <Profile updateUser={updateUser}/>
+            </PrivateRoute>
 
-            <Route path='/register' exact>
+            <Route exact path='/register'>
                 <Register signup={signup}/>
             </Route>
 
-            <Route path='/login' exact>
+            <Route exact path='/login'>
                 <Login login={login}/>
             </Route>
 
