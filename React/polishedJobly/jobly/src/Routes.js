@@ -8,7 +8,7 @@ import Register from './Register';
 import Login from './Login';
 import Company from './Company';
 
-const Routes = () => {
+const Routes = ({signup, login}) => {
     return (
         <Switch>
             <Route path='/' exact>
@@ -37,11 +37,11 @@ const Routes = () => {
             </Route>
 
             <Route path='/register' exact>
-                <Register />
+                <Register signup={signup}/>
             </Route>
 
             <Route path='/login' exact>
-                <Login />
+                <Login login={login}/>
             </Route>
 
             <Redirect to='/' />

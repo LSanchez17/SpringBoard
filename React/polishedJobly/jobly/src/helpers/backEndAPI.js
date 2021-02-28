@@ -66,16 +66,27 @@ class JoblyApi {
         console.log(res)
         return res.jobs;
     }
-    static async getUserInfo(){
-        //gets user information for form data values
+
+    static async applyToJob(userName, id){
+        await this.request(`users/${userName}/jobs/${id}`, {}, 'post');
     }
 
-    static async logOut(){
-        //log user out, remove token
+    static async loginUser(userInfo){
+        //login user
+        let res = await this.request('auth/token', userInfo, 'post');
+        return res.token;
     }
 
-    static async logIn(username, password){
-        //log user in, store infor into store token
+    static async registerUser(userInfo){
+        //register user with info
+        let res = await this.request('auth/register', userInfo, 'post');
+        return res.token;
+    }
+
+    static async updateUserInfo(userName, newInfo){
+        //update user information
+        let res = await this.request(`users/${userName}`, newInfo, 'patch');
+        return res.user;
     }
 
 }

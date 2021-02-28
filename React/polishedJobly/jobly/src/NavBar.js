@@ -1,19 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router';
-import {useDispatch, useSelector} from 'react-redux';
-import {logOut} from './actions/action';
 
 //Routes for the application, in a navigation bar
-const NavBar = () => {
+const NavBar = ({loggedIn, logMeOut}) => {
+    const history = useHistory();
     //if logged in, display other routes, else just two
-    let loggedIn = useSelector(currState => currState.token);
-    let history = useHistory();
-    let dispatch = useDispatch();
-
-    const userLogOut = () => {
-        //logs user out, pushes to main page
-        dispatch(logOut);
+    const leaveSite = async () => {
+        // console.log("im being called");
+        await logMeOut();
         history.push('/');
     }
 
@@ -21,14 +16,14 @@ const NavBar = () => {
         <nav>
             <Link to='/'>Jobly</Link>
             <h3><small>Welcome to Jobly, your one stop shop for all the jobs!</small></h3>
-            {loggedIn 
+            {loggedIn
             ?
             <ul>
                 <li><Link to='/companies'>Companies</Link></li>
                 <li><Link to='/jobs'>Jobs</Link></li>
                 <li><Link to='/profile'>Profile</Link></li>
                 <li>
-                    <button onClick={userLogOut}>Logout USERNAME</button>
+                    <button onClick={leaveSite}>Logout USERNAME</button>
                 </li>
             </ul>
             :
