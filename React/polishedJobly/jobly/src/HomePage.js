@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import jwt from 'jsonwebtoken';
-import { useSelector } from 'react-redux';
 
 const HomePage = ({token}) => {
     let userName;

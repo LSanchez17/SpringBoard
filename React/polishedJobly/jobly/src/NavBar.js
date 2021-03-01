@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {useHistory} from 'react-router';
+import './styles/Navigation.css';
 
 //Routes for the application, in a navigation bar
 const NavBar = ({loggedIn, logMeOut}) => {
@@ -13,23 +14,26 @@ const NavBar = ({loggedIn, logMeOut}) => {
     }
 
     return (
-        <nav>
-            <Link to='/'>Jobly</Link>
-            <h3><small>Welcome to Jobly, your one stop shop for all the jobs!</small></h3>
+        <nav className='Navigation navbar navbar-expand-md'>
+            <ul className='navbar-nav ml-auto'>
+                <li className='nav-item mr-4'>
+                    <NavLink className='navbar-brand' to='/'>Jobly</NavLink>
+                </li>
+            </ul>
             {loggedIn
             ?
-            <ul>
-                <li><Link to='/companies'>Companies</Link></li>
-                <li><Link to='/jobs'>Jobs</Link></li>
-                <li><Link to='/profile'>Profile</Link></li>
-                <li>
-                    <button onClick={leaveSite}>Logout USERNAME</button>
+            <ul className='nav-item mr-4'>
+                <li className='nav-item mr-4'><NavLink to='/companies'>Companies</NavLink></li>
+                <li className='nav-item mr-4'><NavLink to='/jobs'>Jobs</NavLink></li>
+                <li className='nav-item mr-4'><NavLink to='/profile'>Profile</NavLink></li>
+                <li className='nav-item'>
+                    <button onClick={leaveSite}>Logout</button>
                 </li>
             </ul>
             :
-            <ul>
-                <li><Link to='/register'>Register</Link></li>
-                <li><Link to='/login'>Login</Link></li>
+            <ul className='nav-item mr-4'>
+                <li className='nav-item mr-4'><NavLink to='/register'>Register</NavLink></li>
+                <li className='nav-item mr-4'><NavLink to='/login'>Login</NavLink></li>
             </ul>
             }
         </nav>

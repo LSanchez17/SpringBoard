@@ -8,8 +8,10 @@ const Profile = ({updateUser}) => {
     const reduxToken = useSelector(currState => currState.token);
     const history = useHistory();
 
-    let {username} = jwt.decode(reduxToken);
+    //future update, match username with info for placeholders
+    let {username, firstname, lastname, email} = jwt.decode(reduxToken);
 
+    // console.log(jwt.decode(reduxToken))
     const handleChange = (evt) => {
         const {name, value} = evt.target;
         setUserData(data => ({
@@ -30,13 +32,13 @@ const Profile = ({updateUser}) => {
                 <label htmlFor='username'>{username}</label>
 
                 <label htmlFor='firstName'>First Name:</label>
-                <input type='text' id='firstName' name='firstName' onChange={handleChange}></input>
+                <input type='text' id='firstName' name='firstName' placeholder={firstname} onChange={handleChange}></input>
 
                 <label htmlFor='lastName'>Last Name:</label>
-                <input type='text' id='lastName' name='lastName' onChange={handleChange}></input>
+                <input type='text' id='lastName' name='lastName' placeholder={lastname} onChange={handleChange}></input>
 
                 <label htmlFor='email'>Email:</label>
-                <input type='email' id='email' name='email' onChange={handleChange}></input>
+                <input type='email' id='email' name='email' placeholder={email} onChange={handleChange}></input>
 
                 <button type='submit'>Submit</button>
             </form>
