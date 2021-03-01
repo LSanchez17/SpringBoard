@@ -1,5 +1,6 @@
 import React from 'react';
 import jwt from 'jsonwebtoken';
+import './styles/index.css';
 
 const HomePage = ({token}) => {
     let userName;
@@ -9,7 +10,7 @@ const HomePage = ({token}) => {
     }
     
     return (
-        <div>
+        <div className='jumbotron bg-gray'>
             {
             userName ?
             <h2>Hello, {userName.username}, welcome to Jobly.</h2>

@@ -26,21 +26,21 @@ const Profile = ({updateUser}) => {
         history.push('/');
     };
     return (
-        <div>
-            <h2>Update Information</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='username'>{username}</label>
+        <div className='container-fluid justify-content-center'>
+            <h2 className='justify-content-center'>Update Information</h2>
+            <form className='form-group justify-content-center' onSubmit={handleSubmit}>
+                <p className='form'>Username: {username}</p>
 
                 <label htmlFor='firstName'>First Name:</label>
-                <input type='text' id='firstName' name='firstName' placeholder={firstname} onChange={handleChange}></input>
+                <input className='form-control' type='text' id='firstName' name='firstName' placeholder={firstname} onChange={handleChange}></input>
 
                 <label htmlFor='lastName'>Last Name:</label>
-                <input type='text' id='lastName' name='lastName' placeholder={lastname} onChange={handleChange}></input>
+                <input className='form-control' type='text' id='lastName' name='lastName' placeholder={lastname} onChange={handleChange}></input>
 
                 <label htmlFor='email'>Email:</label>
-                <input type='email' id='email' name='email' placeholder={email} onChange={handleChange}></input>
+                <input className='form-control' type='email' id='email' name='email' placeholder={email} onChange={handleChange}></input>
 
-                <button type='submit'>Submit</button>
+                <button className='btn-primary btn' type='submit'>Submit</button>
             </form>
         </div>
     );

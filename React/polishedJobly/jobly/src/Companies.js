@@ -22,26 +22,28 @@ const Companies = () => {
     }, [setListCompanies]);
 
     let companyRender = listCompanies.length > 0 ? listCompanies.map(company => {
-        return <div key={company.handle}>
-                <Link to={`/companies/${company.handle}`}>{company.name}</Link>
-                <h2>{company.name}</h2>
-                <h4>{company.description}</h4>
-                <p>{company.numEmployees}</p>
-                <img src={company.logo_url} alt={`${company.name}`} />
+        return <div className='card' key={company.handle}>
+                    <div className='card-body'>
+                        <Link to={`/companies/${company.handle}`}>{company.name}</Link>
+                        <h2 className='card-title'>{company.name}</h2>
+                        <h4 className='card-subtitle'>{company.description}</h4>
+                        <p className='card-text'>{company.numEmployees}</p>
+                        <img src={`${company.logoUrl}`} alt={`${company.name}`} />
+                    </div>
                 </div>
         }) : null;
 
-    const search = async (searchTerm = {}) => {
+        const search = async (searchTerm = {}) => {
         // console.log(searchTerm)
         let data = await JoblyApi.getCompanyFromSearch(searchTerm);
         setListCompanies(data);
     }
 
     return (
-        <div>           
+        <div className='align-content-center'>           
             <SearchBar type='company' search={search}/>
             <br />
-            {companyRender ? companyRender : <b>Loading...</b>}
+            {companyRender ? companyRender : <div className='spinner-border'><span class="sr-only">Loading...</span></div>}
         </div>
     );
 }

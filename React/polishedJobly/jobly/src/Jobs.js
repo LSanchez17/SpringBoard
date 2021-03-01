@@ -19,11 +19,13 @@ const Jobs = () => {
     }, [setListJobs]);
 
     let jobRender = listJobs.length > 0 ? listJobs.map(job => {
-        return <Job key={job.id} 
+        return <div className='card'>
+                    <Job key={job.id} 
                         title={job.title}
                         salary={job.salary}
                         equity={job.equity}
                         company={job.companyName} />
+                </div>
         }) : null;
     
     const search = async (searchTerm = {}) => {
@@ -36,7 +38,7 @@ const Jobs = () => {
         <div>
             <SearchBar type='job' search={search}/>
         <br />
-            {jobRender ? jobRender : <b>Loading...</b>}\
+            {jobRender ? jobRender : <div className='spinner-border'><span class="sr-only">Loading...</span></div>}
         </div>
     );
 }

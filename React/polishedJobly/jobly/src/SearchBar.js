@@ -31,10 +31,11 @@ const SearchBar = ({type, search}) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor={term}>Search for a specific {type}</label>
-                <input type='text' id={term} name={term} onChange={handleChange}></input>
-                <button type='submit'>Search</button>
+            <form className='form-inline justify-content-center' onSubmit={handleSubmit}>
+                <label htmlFor={term}>Search for a specific {type}: </label>
+                <input className='form-control' type='text' id={term} name={term} onChange={handleChange}></input>
+                
+                <button className='btn btn-primary' type='submit'>Search</button>
             </form>
         </div>
     );

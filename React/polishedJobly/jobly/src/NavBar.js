@@ -1,7 +1,6 @@
 import React from 'react';
-import {NavLink, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router';
-import './styles/Navigation.css';
 
 //Routes for the application, in a navigation bar
 const NavBar = ({loggedIn, logMeOut}) => {
@@ -14,26 +13,26 @@ const NavBar = ({loggedIn, logMeOut}) => {
     }
 
     return (
-        <nav className='Navigation navbar navbar-expand-md'>
-            <ul className='navbar-nav ml-auto'>
-                <li className='nav-item mr-4'>
-                    <NavLink className='navbar-brand' to='/'>Jobly</NavLink>
+        <nav className='bg-light'>
+            <ul className='nav center nav-pills nav-fill'>
+                <li className='nav-item'>
+                    <Link className='rounded navbar-brand' to='/'>Jobly</Link>
                 </li>
             </ul>
             {loggedIn
             ?
-            <ul className='nav-item mr-4'>
-                <li className='nav-item mr-4'><NavLink to='/companies'>Companies</NavLink></li>
-                <li className='nav-item mr-4'><NavLink to='/jobs'>Jobs</NavLink></li>
-                <li className='nav-item mr-4'><NavLink to='/profile'>Profile</NavLink></li>
+            <ul className='nav nav-pills nav-fill justify-content-end'>
+                <li className='nav-item'><Link className='rounded navbar-brand bg-light' to='/companies'>Companies</Link></li>
+                <li className='nav-item'><Link className='rounded navbar-brand bg-light' to='/jobs'>Jobs</Link></li>
+                <li className='nav-item'><Link className='rounded navbar-brand bg-light' to='/profile'>Profile</Link></li>
                 <li className='nav-item'>
-                    <button onClick={leaveSite}>Logout</button>
+                    <button className='btn-sm btn btn-danger'onClick={leaveSite}>Logout</button>
                 </li>
             </ul>
             :
-            <ul className='nav-item mr-4'>
-                <li className='nav-item mr-4'><NavLink to='/register'>Register</NavLink></li>
-                <li className='nav-item mr-4'><NavLink to='/login'>Login</NavLink></li>
+            <ul className='nav nav-pills nav-fill justify-content-end'>
+                <li className='nav-item'><Link className='rounded navbar-brand bg-light' to='/register'>Register</Link></li>
+                <li className='nav-item'><Link className='rounded navbar-brand bg-light' to='/login'>Login</Link></li>
             </ul>
             }
         </nav>
