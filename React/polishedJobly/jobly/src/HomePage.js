@@ -10,7 +10,7 @@ const HomePage = ({token}) => {
     }
     
     return (
-        <div className='jumbotron bg-gray'>
+        <div className='jumbotron bg-gray shadow text-center'>
             {
             userName ?
             <h2>Hello, {userName.username}, welcome to Jobly.</h2>

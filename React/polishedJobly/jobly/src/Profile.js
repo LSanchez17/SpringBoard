@@ -26,7 +26,7 @@ const Profile = ({updateUser}) => {
         history.push('/');
     };
     return (
-        <div className='container-fluid justify-content-center'>
+        <div className='shadow container-fluid justify-content-center'>
             <h2 className='justify-content-center'>Update Information</h2>
             <form className='form-group justify-content-center' onSubmit={handleSubmit}>
                 <p className='form'>Username: {username}</p>

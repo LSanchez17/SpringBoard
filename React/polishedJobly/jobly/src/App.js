@@ -7,6 +7,14 @@ import Routes from './Routes';
 function App() {
   let reduxToken = useSelector(currState => currState.token);
   const dispatch = useDispatch();
+  let localStorageToken = localStorage.getItem('userToken') || null;
+
+  if(reduxToken === null){
+    localStorage.removeItem('token')
+  }
+  else{
+    localStorage.setItem('token', reduxToken);
+  }
 
   //logout, clear username, push to main page
   const userLogOut = async () => {
@@ -14,6 +22,7 @@ function App() {
     // console.log('im the parent')
     dispatch(logOut(reduxToken));
     JoblyApi.token = null;
+    localStorage.removeItem('token');
     return;
   }
 
@@ -21,6 +30,7 @@ function App() {
   const signUserUp = async (registerInfo) =>{
     try{
       let newToken = await JoblyApi.registerUser(registerInfo);
+      localStorage.setItem('token', newToken);
       dispatch(register(newToken));
       return;
     }
@@ -34,6 +44,7 @@ function App() {
   const letUserPass = async(loginInfo) => {
     try{
       let newToken = await JoblyApi.loginUser(loginInfo);
+      localStorage.setItem('token', newToken);
       dispatch(login(newToken));
       return;
     }

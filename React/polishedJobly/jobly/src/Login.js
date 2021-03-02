@@ -20,7 +20,7 @@ const Login = ({login}) => {
     };
 
     return (
-        <div className='container-fluid'>
+        <div className='shadow container-fluid'>
             <h2 className='font-italic'>Login</h2>
             <form className='form-group justfiy-content-center' onSubmit={handleSubmit}>
                 <label htmlFor='username'>UserName:</label>

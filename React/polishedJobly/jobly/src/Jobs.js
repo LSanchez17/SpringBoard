@@ -18,9 +18,11 @@ const Jobs = () => {
         getAllJobs();
     }, [setListJobs]);
 
-    let jobRender = listJobs.length > 0 ? listJobs.map(job => {
+    let jobRender = listJobs.length > 0 ? listJobs.map((job, idx) => {
+        // console.log(job)
         return <div className='card'>
-                    <Job key={job.id} 
+                    <Job key={job.id}
+                        identifier={job.id} 
                         title={job.title}
                         salary={job.salary}
                         equity={job.equity}
@@ -35,7 +37,8 @@ const Jobs = () => {
     }
 
     return (
-        <div>
+        <div className='shadow align-content-center'>
+            <br/>
             <SearchBar type='job' search={search}/>
         <br />
             {jobRender ? jobRender : <div className='spinner-border'><span class="sr-only">Loading...</span></div>}

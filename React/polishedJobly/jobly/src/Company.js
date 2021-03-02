@@ -12,7 +12,7 @@ const Company = ({name = ''}) => {
     useEffect( () => {
         const getOneCompany = async () => {
             let data = await JoblyApi.getCompany(companyHandle);
-            console.log(data)
+            // console.log(data)
             setCompanyData(data);
         }        
     
@@ -28,7 +28,9 @@ const Company = ({name = ''}) => {
 
     let renderedJobs = companyJobs.length > 0 ? companyJobs.map(job => {
         return <div>
-                   <Job title={job.title}
+                   <Job key={job.id}
+                        identifier={job.id}
+                        title={job.title}
                         salary={job.salary}
                         equity={job.equity}
                         company={job.Company} />
@@ -36,8 +38,8 @@ const Company = ({name = ''}) => {
     }) : <b>loading...</b>;
 
     return (
-        <div>
-            <div>
+        <div className='container-fluid bg-light shadow'>
+            <div className='shadow'>
                 <h3>{companyData.name}</h3>
                 <p>{companyData.description}</p>
                 <small>{companyData.numEmployees} Employees</small>

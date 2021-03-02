@@ -40,7 +40,8 @@ const Companies = () => {
     }
 
     return (
-        <div className='align-content-center'>           
+        <div className='shadow align-content-center'>           
+            <br/>
             <SearchBar type='company' search={search}/>
             <br />
             {companyRender ? companyRender : <div className='spinner-border'><span class="sr-only">Loading...</span></div>}
