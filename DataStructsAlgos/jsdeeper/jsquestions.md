@@ -225,11 +225,58 @@
     ```
     It will display 5, five times.  This is due to the loop being run faster than the actual time it takes for the *setTimeout* function to **Actually** execute.
 
-# 20
-# 21
-# 22
-# 23
-# 24
+# 20 What would the following lines of code output to the console?
+    ``` 
+        console.log('0 || 1 = '+(0 || 1));
+        console.log('1 || 2 = '+(1 || 2));
+        console.log('0 && 1 = '+(0 && 1));
+        console.log('1 && 2 = '+(1 && 2));
+    ```
+    First line: 0 || 1 = 1;
+    Second line: 1 || 2 = 1;
+    Third line: 0 && 1 = 0;
+    Fourth line: 1 && 2 = 2;
+    This is due to the logical operators of *||* and *&&*.  They each evaluate wheter one or the other, or both left and right sides need to be present.
+
+# 21 What would be the outptut when the following code is executed? 
+    ```
+    console.log(false == '0');
+    console.log(false === '0');
+    ```
+    True, and then false.  Strict equality is different than coercion equality.  The first one will coerce the values before comparing, while the second one strictly compares each individual item as its own.
+
+# 22 What is the output of the following code?
+    ```
+    var a={},
+        b={key:'b'},
+        c={key:'c'};
+
+        a[b]=123;
+        a[c]=456;
+
+    console.log(a[b]);
+    ```
+
+    456.  Why? Javascript wack sometimes.  Setting an object, to be a property of another object, is the result of **[object Object]**.  Now doing this with the *a[c]* creates another **[object Object]**.  With both of these being essentially the same reference, we reasign to 456.
+
+# 23 What will the following code output to the console?
+    ```
+    console.log((function f(n){return ((n > 1) ? n *f(n01) : n)})(10));
+    ```
+
+    The code returns 10!, so a slightly larger number.  This is a case of recursion.  We call each iteration until we hit an exit condition.
+
+# 24 What does this do?
+    ```
+    function(x) {
+        return (function(y) {
+            console.log(x);
+        })(2)
+    }(1);
+    ```
+
+    Immediately invoking functions, with inner functions.  Scope means that y is 2, x is 1.  We never invoke y, but it is set during the immediate call, and then the outer inmediate call is set for x, which is called inside the inner function.  Thanks to closure, we have access to it!
+    
 # 25
 # 26
 # 27
