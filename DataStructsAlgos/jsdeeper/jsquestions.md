@@ -276,12 +276,62 @@
     ```
 
     Immediately invoking functions, with inner functions.  Scope means that y is 2, x is 1.  We never invoke y, but it is set during the immediate call, and then the outer inmediate call is set for x, which is called inside the inner function.  Thanks to closure, we have access to it!
+
+# 25 What does this code do?
+    ```
+    var hero = {
+        _name: 'John Doe',
+        getSecretIdentity: function (){
+            return this._name;
+        }
+    };
+
+    var stoleSecretIdentity = hero.getSecretIdentity;
+
+    console.log(stoleSecretIdentity());
+    console.log(hero.getSecretIdentity());
+    ```
+    Undefined, and John Doe.  The variable *stoleSecretIdentity* is useless, since it is not a function, but a variable, so its undefined.  It might call a method of the object, but that does not mean it **becomes** that method.
+
+# 26 What does this code do?
+    ```
+    (function () {
+        try {
+            throw new Error();
+        } 
+        catch (x) {
+            var x = 1, y = 2;
+            console.log(x);
+        }
+        console.log(x);
+        console.log(y);
+    })();
+    ```
+
+    It is immediately invoked, and throws an error.  As such it'll print 1, undefined, and 2.  This is due to the *var* naming, and the scope of *var* labelings, which moves its scope outside the function.
     
-# 25
-# 26
-# 27
-# 28
-# 29
+# 27 What will this do?
+    ```
+    var x = 21;
+    var girl = function () {
+        console.log(x);
+        var x = 20;
+    };
+    girl ();
+    ```
+
+    It will print undefined.  This is becuase of hoisting.  The function knows there is a declared variable inside of its scope, so it uses that variable reference.  However, that instance has not been defined yet, so it comes out to undefined.  Had the console.log statement been after the declaration, we would have 20.
+
+# 28 How do you add an element at the back of ana array? How to add one at the front?
+
+    Either declare a new ending element, *array[array.length] = VALUE*. Or run a sort through the array, shifting each elemen to the right by one to add to the front.  Or use *array.push(item)* and *array.unshift(item)*.
+
+# 29 What does this return?
+    ```
+    console.log(typeof typeof 1);
+    ```
+
+    A string.  This is because *typeof 1* evaluates to **'number'**.  Then the typeof before evaluates that into a variable type.
 # 30
 # 31
 # 32
