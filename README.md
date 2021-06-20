@@ -2,5 +2,12 @@
 Collection of work done at SpringBoard Bootcamp
 
 # Split into sections
-The sections cover the range of topics that were introduced during the course of the bootcamp.
-If you have any questions, or need help understanding, hit me up :)
+* Javascript & APIs
+* Bootstrap and styling
+* jQuery
+* Python
+* Node
+* React
+* Data Structures & Algorithms
+
+If you get stuck or need help, contact me through [Twitter](www.twitter.com/LuisDoesSE)
