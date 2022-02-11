@@ -17,7 +17,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+    steps:
+      # ...
+      - name: Should I notify slack?
+        # You may pin to the exact commit or the version.
+        # uses: Jimdo/should-i-notify-action@d4010db2291c8703dea858c09cd91f5fd2710d11
+        uses: Jimdo/should-i-notify-action@v1.0.0
+        with:
+          # json representation of the `needs` object in your context (`toJson(needs)`)
+          needs_context: ('toJson(Uhh it broke)')
+          # A github token (secrets.GITHUB_TOKEN will suffice)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+ 
+          
   automerge:
     needs: build
     runs-on: ubuntu-latest
