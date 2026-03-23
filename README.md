@@ -9,5 +9,3 @@ Collection of work done at SpringBoard Bootcamp
 * Node
 * React
 * Data Structures & Algorithms
-
-If you get stuck or need help, contact me through [Twitter](www.twitter.com/LuisDoesSE)
